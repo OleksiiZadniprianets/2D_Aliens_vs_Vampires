@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: b7dae4accf301494398f175e6978a051
+guid: e793a9e2ea11efc4ab19098e0f07fafc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3026135671637522186
-    second: cirle_sniper_allien_0
+      213: 8006345984887819830
+    second: vampire_w_wizard_0
+  - first:
+      213: 1183537535859495937
+    second: vampire_w_wizard_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cirle_sniper_allien_0
+      name: vampire_w_wizard_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 11
         y: 0
-        width: 783
-        height: 783
+        width: 1494
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a07b7163c5efef920800000000000000
-      internalID: 3026135671637522186
+      spriteID: 63e0d1af0414c1f60800000000000000
+      internalID: 8006345984887819830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vampire_w_wizard_1
+      rect:
+        serializedVersion: 2
+        x: 1310
+        y: 814
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1041f334e15cc6010800000000000000
+      internalID: 1183537535859495937
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cirle_sniper_allien_0: 3026135671637522186
+      vampire_w_wizard_0: 8006345984887819830
+      vampire_w_wizard_1: 1183537535859495937
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

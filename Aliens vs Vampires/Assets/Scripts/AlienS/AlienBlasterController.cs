@@ -6,9 +6,9 @@ public class AlienBlasterController : MonoBehaviour
     public int maxHP = 40;
     int currentHP;
 
-    public float attackRange = 4f;
-    public float attackCooldown = 0.8f;
-    public int damage = 8;
+    public float attackRange;
+    public float attackCooldown;
+    public int damage;
 
     public Transform firePoint;
     public LineRenderer laser;
@@ -70,7 +70,7 @@ public class AlienBlasterController : MonoBehaviour
     {
         if (enemy == null)
             return;
-
+        Debug.Log("Blaster shot");
         enemy.TakeDamage(damage);
 
         if (laser != null && firePoint != null)

@@ -32,21 +32,25 @@ public class BuildManager : MonoBehaviour
         int lane;
         Vector3 spawnPos = position;
 
-        if (position.y > 1.0f) // верхня дорога
+        if (position.y > 0)
         {
             lane = 0;
-            spawnPos.y = 2.0f;
+            spawnPos.y = 2f;
         }
-        else // нижня дорога
+        else
         {
             lane = 1;
-            spawnPos.y = -2.0f;
+            spawnPos.y = -2f;
         }
 
         if (!CoinManager.instance.SpendCoins(selectedCost))
             return;
 
         GameObject unit = Instantiate(selectedUnit, spawnPos, Quaternion.identity);
+
+        AlienSniperController sniper = unit.GetComponent<AlienSniperController>();
+        if (sniper != null)
+            sniper.lane = lane;
 
         AlienBladeController blade = unit.GetComponent<AlienBladeController>();
         if (blade != null)
@@ -55,6 +59,14 @@ public class BuildManager : MonoBehaviour
         AlienBlasterController blaster = unit.GetComponent<AlienBlasterController>();
         if (blaster != null)
             blaster.lane = lane;
+
+        AlienRobotCallerController robot = unit.GetComponent<AlienRobotCallerController>();
+        if (robot != null)
+            robot.lane = lane;
+
+        AlienMutantController mutant = unit.GetComponent<AlienMutantController>();
+        if (mutant != null)
+            mutant.lane = lane;
 
         selectedUnit = null;
     }

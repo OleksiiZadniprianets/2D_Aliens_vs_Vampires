@@ -8,35 +8,34 @@ public class EnemyController : MonoBehaviour
 
     public int lane;
 
-    float baseDamage;
-
     public int maxHP = 30;
-    int currentHP;
+    protected int currentHP;
 
-    public int damage = 10;
+    public int damage = 5;
 
     private int index = 0;
+
+    public float attackRange = 1.2f;
+    public float attackCooldown = 1.5f;
+
+    protected float attackTimer = 0f;
+
 
     void Start()
     {
         currentHP = maxHP;
         healthBar.SetHealth(currentHP, maxHP);
-        baseDamage = damage;
     }
 
-    public float attackRange = 1.2f;
-    public float attackCooldown = 1.5f;
-
-    float attackTimer = 0f;
-    void Update()
+    protected virtual void Update()
     {
         if (path == null || path.Length == 0)
             return;
 
         attackTimer += Time.deltaTime;
 
-        AlienBladeController alien = FindClosestAlien();
-
+        AlienBaseController alien = FindClosestAlien();
+        Debug.Log("Enemy lane = " + lane);
         if (alien != null)
         {
             float dist = Vector3.Distance(transform.position, alien.transform.position);
@@ -49,36 +48,18 @@ public class EnemyController : MonoBehaviour
 
                     if (DayNightManager.instance.isNight)
                     {
-                        finalDamage *= 1.5f;
+                        finalDamage *= 1.25f;
                     }
-
                     alien.TakeDamage((int)finalDamage);
+
                     attackTimer = 0f;
                 }
 
                 return;
             }
+            Debug.Log("Alien found: " + alien);
         }
-        AlienBladeController FindClosestAlien()
-        {
-            AlienBladeController[] aliens = FindObjectsOfType<AlienBladeController>();
 
-            AlienBladeController closest = null;
-            float minDist = Mathf.Infinity;
-
-            foreach (AlienBladeController alien in aliens)
-            {
-                float dist = Vector3.Distance(transform.position, alien.transform.position);
-
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    closest = alien;
-                }
-            }
-
-            return closest;
-        }
         if (index >= path.Length)
         {
             ReachBase();
@@ -97,7 +78,31 @@ public class EnemyController : MonoBehaviour
         {
             index++;
         }
+    }
 
+    protected AlienBaseController FindClosestAlien()
+    {
+        AlienBaseController[] aliens = FindObjectsOfType<AlienBaseController>();
+
+        AlienBaseController closest = null;
+        float minDist = Mathf.Infinity;
+
+        foreach (AlienBaseController alien in aliens)
+        {
+            // перевіряємо тільки доріжку
+            if (alien.lane != lane)
+                continue;
+
+            float dist = Vector3.Distance(transform.position, alien.transform.position);
+
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closest = alien;
+            }
+        }
+
+        return closest;
     }
 
     public void TakeDamage(int damage)
@@ -106,14 +111,12 @@ public class EnemyController : MonoBehaviour
         healthBar.SetHealth(currentHP, maxHP);
 
         if (currentHP <= 0)
-        {
             Die();
-        }
     }
 
     void Die()
     {
-        CoinManager.instance.AddCoins(10);
+        CoinManager.instance.AddCoins(15);
         Destroy(gameObject);
     }
 
@@ -122,10 +125,31 @@ public class EnemyController : MonoBehaviour
         BaseController baseController = FindObjectOfType<BaseController>();
 
         if (baseController != null)
-        {
             baseController.TakeDamage(damage);
-        }
 
         Destroy(gameObject);
     }
+
+    protected void MoveAlongPath()
+    {
+        if (index >= path.Length)
+        {
+            ReachBase();
+            return;
+        }
+
+        Transform target = path[index];
+
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            target.position,
+            speed * Time.deltaTime
+        );
+
+        if (Vector3.Distance(transform.position, target.position) < 0.1f)
+        {
+            index++;
+        }
+    }
+
 }

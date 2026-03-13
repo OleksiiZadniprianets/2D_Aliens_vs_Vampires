@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b7dae4accf301494398f175e6978a051
+guid: 28835e0c101b06749a5f2842153dcba5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3026135671637522186
-    second: cirle_sniper_allien_0
+      213: 2199712213608165079
+    second: circle_alien_BigBoy_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cirle_sniper_allien_0
+      name: circle_alien_BigBoy_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 783
-        height: 783
+        width: 744
+        height: 744
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a07b7163c5efef920800000000000000
-      internalID: 3026135671637522186
+      spriteID: 7dee33c8a92f68e10800000000000000
+      internalID: 2199712213608165079
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cirle_sniper_allien_0: 3026135671637522186
+      circle_alien_BigBoy_0: 2199712213608165079
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
