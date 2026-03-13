@@ -6,6 +6,10 @@ public class EnemyController : MonoBehaviour
     public Transform[] path;
     public float speed = 2f;
 
+    public int lane;
+
+    float baseDamage;
+
     public int maxHP = 30;
     int currentHP;
 
@@ -17,7 +21,9 @@ public class EnemyController : MonoBehaviour
     {
         currentHP = maxHP;
         healthBar.SetHealth(currentHP, maxHP);
+        baseDamage = damage;
     }
+
     public float attackRange = 1.2f;
     public float attackCooldown = 1.5f;
 
@@ -39,7 +45,14 @@ public class EnemyController : MonoBehaviour
             {
                 if (attackTimer >= attackCooldown)
                 {
-                    alien.TakeDamage(damage);
+                    float finalDamage = damage;
+
+                    if (DayNightManager.instance.isNight)
+                    {
+                        finalDamage *= 1.5f;
+                    }
+
+                    alien.TakeDamage((int)finalDamage);
                     attackTimer = 0f;
                 }
 
@@ -84,6 +97,7 @@ public class EnemyController : MonoBehaviour
         {
             index++;
         }
+
     }
 
     public void TakeDamage(int damage)

@@ -5,7 +5,10 @@ public class CoinManager : MonoBehaviour
     public static CoinManager instance;
 
     public int coins = 100;
-
+    void Start()
+    {
+        BrainUI.instance.UpdateBrains(coins);
+    }
     void Awake()
     {
         instance = this;
@@ -14,6 +17,9 @@ public class CoinManager : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
+
+        BrainUI.instance.UpdateBrains(coins);
+
         Debug.Log("Coins: " + coins);
     }
 
@@ -22,6 +28,9 @@ public class CoinManager : MonoBehaviour
         if (coins >= amount)
         {
             coins -= amount;
+
+            BrainUI.instance.UpdateBrains(coins);
+
             Debug.Log("Coins: " + coins);
             return true;
         }

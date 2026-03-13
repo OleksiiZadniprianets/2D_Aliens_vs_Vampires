@@ -9,6 +9,8 @@ public class SpawnManager : MonoBehaviour
 
     public float spawnInterval = 3f;
 
+    public int lane; // 0 = top lane, 1 = bottom lane
+
     float timer = 0f;
 
     void Update()
@@ -29,5 +31,7 @@ public class SpawnManager : MonoBehaviour
         EnemyController controller = enemy.GetComponent<EnemyController>();
 
         controller.path = path;
+
+        controller.lane = lane; // передаємо lane ворогу
     }
 }
