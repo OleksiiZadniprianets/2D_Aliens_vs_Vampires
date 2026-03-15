@@ -19,14 +19,17 @@ public class EnemyController : MonoBehaviour
     public float attackCooldown = 1.5f;
 
     protected float attackTimer = 0f;
-
+    SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        currentHP = maxHP;
-        healthBar.SetHealth(currentHP, maxHP);
-    }
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
+        if (DayNightManager.instance != null && DayNightManager.instance.IsNight())
+        {
+            SetNightMode(true);
+        }
+    }
     protected virtual void Update()
     {
         if (path == null || path.Length == 0)
@@ -48,7 +51,7 @@ public class EnemyController : MonoBehaviour
 
                     if (DayNightManager.instance.isNight)
                     {
-                        finalDamage *= 1.25f;
+                        finalDamage *= 1.5f;
                     }
                     alien.TakeDamage((int)finalDamage);
 
@@ -150,6 +153,22 @@ public class EnemyController : MonoBehaviour
         {
             index++;
         }
+    }
+
+    void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void SetNightMode(bool night)
+    {
+        if (spriteRenderer == null)
+            return;
+
+        if (night)
+            spriteRenderer.color = new Color(0.9f, 0.55f, 0.55f);
+        else
+            spriteRenderer.color = Color.white;
     }
 
 }

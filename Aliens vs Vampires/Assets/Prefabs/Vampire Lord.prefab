@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2343223837900338925}
   - component: {fileID: 3013843515668418236}
   - component: {fileID: 2674062835312979040}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 4988994030723412886}
   - component: {fileID: 4084574169788274780}
   - component: {fileID: 2760907296820591953}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: HP_Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 2879835907267290661}
   - component: {fileID: 3095463014959985352}
   - component: {fileID: 3512342298100016457}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: HP_Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 4287549464077821415}
   - component: {fileID: 6262769654221306130}
   - component: {fileID: 5525799957275792271}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HP_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 6124997493054802625}
   - component: {fileID: 5556325606036973515}
   - component: {fileID: 1064119825485378471}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Vampire Lord
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.1638174, y: 0.08190608}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -506,7 +506,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 9.245258, y: 8.917637}
   m_EdgeRadius: 0
 --- !u!50 &1549608632264526452
 Rigidbody2D:
