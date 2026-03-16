@@ -13,13 +13,23 @@ public class AlienMutantController : AlienBaseController
     public float shootCooldown = 0.8f;
     public Transform firePoint;
     public LineRenderer laser;
-
+    public AudioClip shootSound;
+    AudioSource audioSource;
+    public AudioClip swordSound;
     float meleeTimer;
     float shootTimer;
 
     void Start()
     {
         currentHP = maxHP;
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f;
     }
 
     void Update()
@@ -38,6 +48,9 @@ public class AlienMutantController : AlienBaseController
         {
             target.TakeDamage(shootDamage);
 
+            if (audioSource != null && shootSound != null)
+                audioSource.PlayOneShot(shootSound);
+
             if (laser != null && firePoint != null)
                 StartCoroutine(Laser(target.transform));
 
@@ -47,6 +60,10 @@ public class AlienMutantController : AlienBaseController
         if (dist <= meleeRange && meleeTimer >= meleeCooldown)
         {
             target.TakeDamage(meleeDamage);
+
+            if (audioSource != null && swordSound != null)
+                audioSource.PlayOneShot(swordSound);
+
             meleeTimer = 0f;
         }
     }
@@ -60,6 +77,7 @@ public class AlienMutantController : AlienBaseController
         yield return new WaitForSeconds(0.1f);
 
         laser.enabled = false;
+
     }
 
     EnemyController FindTarget()

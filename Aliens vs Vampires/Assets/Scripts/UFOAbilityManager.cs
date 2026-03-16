@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections;
+using TMPro;
+using UnityEngine.UI;
 
 public class UFOAbilityManager : MonoBehaviour
 {
@@ -16,6 +18,9 @@ public class UFOAbilityManager : MonoBehaviour
     public float abductDuration = 0.8f;
 
     public LayerMask enemyLayer;
+    [Header("Sound")]
+    public AudioClip ufoUseSound;
+    AudioSource audioSource;
 
     bool isSelectingTarget = false;
     bool isAbducting = false;
@@ -23,13 +28,41 @@ public class UFOAbilityManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f;
     }
 
     void Update()
     {
-        Debug.Log("Update working");
+        // --- Кулдаун UFO ---
+        if (cooldownTimer > 0)
+        {
+            cooldownTimer -= Time.deltaTime;
+
+            if (cooldownText != null)
+                cooldownText.text = Mathf.Ceil(cooldownTimer).ToString();
+
+            if (cooldownTimer <= 0)
+            {
+                cooldownTimer = 0;
+
+                if (cooldownText != null)
+                    cooldownText.text = "";
+
+                if (ufoButton != null)
+                    ufoButton.interactable = true;
+            }
+        }
+
         if (!isSelectingTarget || isAbducting)
             return;
+
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Mouse clicked for UFO");
@@ -67,12 +100,17 @@ public class UFOAbilityManager : MonoBehaviour
 
     public void ActivateUFOSelection()
     {
-        if (isAbducting)
+        if (isAbducting || cooldownTimer > 0)
             return;
 
         isSelectingTarget = true;
     }
+    [Header("Cooldown")]
+    public float cooldown = 30f;
+    float cooldownTimer = 0f;
 
+    public TextMeshProUGUI cooldownText;
+    public Button ufoButton;
     public bool IsSelectingTarget()
     {
         return isSelectingTarget;
@@ -96,7 +134,8 @@ public class UFOAbilityManager : MonoBehaviour
         Vector3 ufoPos = startEnemyPos + Vector3.up * ufoHeight;
 
         GameObject ufoObject = Instantiate(ufoPrefab, ufoPos, Quaternion.identity);
-
+        if (audioSource != null && ufoUseSound != null)
+            audioSource.PlayOneShot(ufoUseSound);
         SpriteRenderer renderer = ufoObject.GetComponent<SpriteRenderer>();
 
         // --- Анімація UFO ---
@@ -131,5 +170,9 @@ public class UFOAbilityManager : MonoBehaviour
         Destroy(ufoObject);
 
         isAbducting = false;
+        cooldownTimer = cooldown;
+
+        if (ufoButton != null)
+            ufoButton.interactable = false;
     }
 }

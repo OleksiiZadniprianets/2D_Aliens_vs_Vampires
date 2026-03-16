@@ -1,22 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VampireLordController : EnemyController
 {
     public GameObject vampirePrefab;
-    public float summonCooldown = 7f;
+    public float summonCooldown = 3f;
 
-    float timer;
+    float summonTimer;
 
     protected override void Update()
     {
         base.Update();
 
-        timer += Time.deltaTime;
+        summonTimer += Time.deltaTime;
 
-        if (timer >= summonCooldown)
+        if (summonTimer >= summonCooldown)
         {
             Summon();
-            timer = 0f;
+            summonTimer = 0f;
         }
     }
 
@@ -26,9 +26,14 @@ public class VampireLordController : EnemyController
 
         GameObject v = Instantiate(vampirePrefab, spawnPos, Quaternion.identity);
 
-        EnemyController e = v.GetComponent<EnemyController>();
+        EnemyController newEnemy = v.GetComponent<EnemyController>();
+        EnemyController lord = GetComponent<EnemyController>();
 
-        e.path = path;
-        e.lane = lane;
+        if (newEnemy != null && lord != null)
+        {
+            newEnemy.path = lord.path;
+            newEnemy.lane = lord.lane;
+            newEnemy.index = lord.index;   // ⭐ ключовий рядок
+        }
     }
 }

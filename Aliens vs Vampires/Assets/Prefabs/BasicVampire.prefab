@@ -555,8 +555,11 @@ MonoBehaviour:
   lane: 0
   maxHP: 25
   damage: 7
+  index: 0
   attackRange: 1.2
   attackCooldown: 1.5
+  attackSound: {fileID: 8300000, guid: 108d9559312a3d549904b30a9a5202dd, type: 3}
+  coinReward: 15
 --- !u!114 &5556325606036973515
 MonoBehaviour:
   m_ObjectHideFlags: 0

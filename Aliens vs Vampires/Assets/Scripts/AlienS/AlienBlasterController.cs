@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.Audio;
 
 public class AlienBlasterController : MonoBehaviour
 {
@@ -14,13 +15,22 @@ public class AlienBlasterController : MonoBehaviour
     public LineRenderer laser;
 
     public int lane;
-
+    public AudioClip shootSound;
+    AudioSource audioSource;
     float cooldown;
 
     void Start()
     {
         currentHP = maxHP;
         cooldown = 0f;
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f;
     }
 
     void Update()
@@ -70,11 +80,15 @@ public class AlienBlasterController : MonoBehaviour
     {
         if (enemy == null)
             return;
+
         Debug.Log("Blaster shot");
         enemy.TakeDamage(damage);
 
         if (laser != null && firePoint != null)
             StartCoroutine(Laser(enemy.transform));
+
+        if (audioSource != null && shootSound != null)
+            audioSource.PlayOneShot(shootSound);
     }
 
     IEnumerator Laser(Transform target)

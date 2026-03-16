@@ -222,7 +222,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: f63d574838ccfb44f84acc05fed0af48, type: 3}
+  - {fileID: 2100000, guid: a81bcbecf150842449b17ae47feb4141, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -248,7 +248,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.5
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -328,6 +328,8 @@ MonoBehaviour:
   shootCooldown: 2
   firePoint: {fileID: 2559788562675915090}
   laser: {fileID: 1938988390904205533}
+  shootSound: {fileID: 8300000, guid: cf4bdcf875de0714abc9a7cca48c165b, type: 3}
+  swordSound: {fileID: 8300000, guid: 61942f0b5588d48418a503e7f438ccaa, type: 3}
 --- !u!114 &15053923480399271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 8822363404919429915}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7, y: 5.3, z: 0}
+  m_LocalPosition: {x: -1.6, y: 5.5, z: 0}
   m_LocalScale: {x: 40, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

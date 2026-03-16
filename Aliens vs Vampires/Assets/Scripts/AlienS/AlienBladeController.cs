@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AlienBladeController : MonoBehaviour
 {
@@ -11,13 +12,22 @@ public class AlienBladeController : MonoBehaviour
     public int damage = 10;
 
     public int lane;
-
+    public AudioClip swordSound;
+    AudioSource audioSource;
     float timer = 0f;
 
     void Start()
     {
         currentHP = maxHP;
         healthBar.SetHealth(currentHP, maxHP);
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f;
     }
 
     void Update()
@@ -68,6 +78,9 @@ public class AlienBladeController : MonoBehaviour
     void Attack(EnemyController enemy)
     {
         enemy.TakeDamage(damage);
+
+        if (audioSource != null && swordSound != null)
+            audioSource.PlayOneShot(swordSound);
     }
 
     public void TakeDamage(int damage)

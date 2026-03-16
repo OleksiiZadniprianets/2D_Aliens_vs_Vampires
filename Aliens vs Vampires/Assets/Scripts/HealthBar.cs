@@ -13,6 +13,9 @@ public class HealthBar : MonoBehaviour
 
     public void SetHealth(float current, float max)
     {
+        if (bar == null)
+            return;
+
         float value = current / max;
 
         bar.localScale = new Vector3(

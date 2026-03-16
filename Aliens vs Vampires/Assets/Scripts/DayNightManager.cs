@@ -27,6 +27,11 @@ public class DayNightManager : MonoBehaviour
 
     public TMP_Text dayNightText;
 
+    public AudioClip nightSound;
+    public AudioClip daySound;
+
+    AudioSource audioSource;
+
     void Awake()
     {
         instance = this;
@@ -35,6 +40,15 @@ public class DayNightManager : MonoBehaviour
     void Start()
     {
         UpdateUI();
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+        audioSource.spatialBlend = 0f;
     }
 
     void Update()
@@ -63,14 +77,18 @@ public class DayNightManager : MonoBehaviour
     }
     public void SwitchToNight()
     {
-        Debug.Log("Switching to NIGHT");
         StartCoroutine(DayNightTransition(true));
+
+        if (audioSource != null && nightSound != null)
+            audioSource.PlayOneShot(nightSound);
     }
 
     public void SwitchToDay()
     {
-        Debug.Log("Switching to DAY");
         StartCoroutine(DayNightTransition(false));
+
+        if (audioSource != null && daySound != null)
+            audioSource.PlayOneShot(daySound);
     }
     IEnumerator DayNightTransition(bool night)
     {

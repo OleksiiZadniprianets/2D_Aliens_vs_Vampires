@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyController : MonoBehaviour
 {
@@ -13,22 +14,41 @@ public class EnemyController : MonoBehaviour
 
     public int damage = 5;
 
-    private int index = 0;
+    public int index = 0;
 
     public float attackRange = 1.2f;
     public float attackCooldown = 1.5f;
 
+    public AudioClip attackSound;
+    AudioSource audioSource;
+
     protected float attackTimer = 0f;
     SpriteRenderer spriteRenderer;
+    Color originalColor;
+
+    [Header("Reward")]
+    public int coinReward = 15;
 
     void Start()
     {
+        currentHP = maxHP;
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (DayNightManager.instance != null && DayNightManager.instance.IsNight())
         {
             SetNightMode(true);
         }
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f;
     }
     protected virtual void Update()
     {
@@ -48,6 +68,7 @@ public class EnemyController : MonoBehaviour
                 if (attackTimer >= attackCooldown)
                 {
                     float finalDamage = damage;
+                    audioSource.PlayOneShot(attackSound);
 
                     if (DayNightManager.instance.isNight)
                     {
@@ -119,7 +140,7 @@ public class EnemyController : MonoBehaviour
 
     void Die()
     {
-        CoinManager.instance.AddCoins(15);
+        CoinManager.instance.AddCoins(coinReward);
         Destroy(gameObject);
     }
 
@@ -170,5 +191,17 @@ public class EnemyController : MonoBehaviour
         else
             spriteRenderer.color = Color.white;
     }
+    public void FlashBuff()
+    {
+        StartCoroutine(BuffFlash());
+    }
 
+    IEnumerator BuffFlash()
+    {
+        spriteRenderer.color = Color.magenta;
+
+        yield return new WaitForSeconds(0.15f);
+
+        spriteRenderer.color = originalColor;
+    }
 }

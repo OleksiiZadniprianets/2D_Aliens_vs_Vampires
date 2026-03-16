@@ -15,13 +15,22 @@ public class AlienSniperController : MonoBehaviour
     public LineRenderer laser;
 
     public int lane;
-
+    public AudioClip shootSound;
+    AudioSource audioSource;
     float cooldown;
 
     void Start()
     {
         currentHP = maxHP;
         cooldown = 0f;
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f;
     }
 
     void Update()
@@ -75,6 +84,9 @@ public class AlienSniperController : MonoBehaviour
 
         if (laser != null && firePoint != null)
             StartCoroutine(Laser(enemy.transform));
+
+        if (audioSource != null && shootSound != null)
+            audioSource.PlayOneShot(shootSound);
     }
 
     IEnumerator Laser(Transform target)

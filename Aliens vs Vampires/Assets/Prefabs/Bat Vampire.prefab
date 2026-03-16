@@ -450,7 +450,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 9b364a80cd1247f4aa7c1d02a50fc44e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7ee6844ef88e61e42bd121e6e525f29f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -495,7 +495,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.1483972, y: 0.30967045}
+  m_Offset: {x: -0.046104908, y: 0.04609871}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -505,7 +505,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 14.779812, y: 7.0797796}
+  m_Size: {x: 10.312192, y: 8.560394}
   m_EdgeRadius: 0
 --- !u!50 &1549608632264526452
 Rigidbody2D:
@@ -551,12 +551,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  speed: 3
+  speed: 1.5
   lane: 0
-  maxHP: 15
+  maxHP: 25
   damage: 7
-  attackRange: 1.5
+  index: 0
+  attackRange: 1.2
   attackCooldown: 1.5
+  attackSound: {fileID: 8300000, guid: 108d9559312a3d549904b30a9a5202dd, type: 3}
+  coinReward: 15
 --- !u!114 &5556325606036973515
 MonoBehaviour:
   m_ObjectHideFlags: 0

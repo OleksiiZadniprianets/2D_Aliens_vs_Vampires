@@ -294,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 8712074510119418464}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 5.3, z: 0}
+  m_LocalPosition: {x: 0.3, y: 5.5, z: 0}
   m_LocalScale: {x: 40, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 7935062275910209075}
   - component: {fileID: 1549608632264526452}
   - component: {fileID: 5556325606036973515}
-  - component: {fileID: 8430761728458872198}
+  - component: {fileID: 8058826974489446942}
   m_Layer: 3
   m_Name: VampireBuffer
   m_TagString: Untagged
@@ -450,7 +450,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: e793a9e2ea11efc4ab19098e0f07fafc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d1ec02ebf6ce5f4483b67c37e4ba9f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -495,7 +495,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.21333122, y: -0.00000047683716}
+  m_Offset: {x: 0.39858294, y: 0.20877838}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -505,7 +505,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 10.955526, y: 8.466657}
+  m_Size: {x: 9.996488, y: 8.7817745}
   m_EdgeRadius: 0
 --- !u!50 &1549608632264526452
 Rigidbody2D:
@@ -547,7 +547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 4287549464077821415}
---- !u!114 &8430761728458872198
+--- !u!114 &8058826974489446942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -556,16 +556,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8839081630570605787}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b136dd8ef5fd0f49ba32545f254202e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f6de09e9626cac4986c85629767beb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 5525799957275792271}
   path: []
-  speed: 2
+  speed: 2.25
   lane: 0
-  maxHP: 40
-  damage: 0
-  attackRange: 0
+  maxHP: 30
+  damage: 10
+  index: 0
+  attackRange: 1.2
   attackCooldown: 1.5
-  buffCooldown: 5
-  buffMultiplier: 1.25
+  attackSound: {fileID: 8300000, guid: 108d9559312a3d549904b30a9a5202dd, type: 3}
+  coinReward: 25
+  healOnHit: 7

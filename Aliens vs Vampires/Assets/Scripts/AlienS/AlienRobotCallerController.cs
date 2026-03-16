@@ -9,6 +9,8 @@ public class AlienRobotCallerController : MonoBehaviour
 
     public float abilityCooldown = 15f;
     public int robotDamage = 50;
+    public AudioClip robotAttackSound;
+    AudioSource audioSource;
 
     float timer;
 
@@ -16,6 +18,14 @@ public class AlienRobotCallerController : MonoBehaviour
     {
         currentHP = maxHP;
         timer = abilityCooldown;
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f;
     }
 
     void Update()
@@ -48,10 +58,11 @@ public class AlienRobotCallerController : MonoBehaviour
             }
         }
 
+        if (audioSource != null && robotAttackSound != null)
+            audioSource.PlayOneShot(robotAttackSound);
+
         if (strongest != null)
-        {
             strongest.TakeDamage(robotDamage);
-        }
     }
 
     public void TakeDamage(int dmg)

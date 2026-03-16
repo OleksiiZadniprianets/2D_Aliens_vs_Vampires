@@ -1,9 +1,10 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class VampireBufferController : EnemyController
 {
-    public float buffCooldown = 5f;
-    public float buffMultiplier = 1.25f;
+    public float buffCooldown = 2f;
+    public float buffMultiplier = 1.5f;
 
     float timer;
     bool stopped = false;
@@ -43,7 +44,9 @@ public class VampireBufferController : EnemyController
             if (Vector3.Distance(transform.position, e.transform.position) < 6f)
             {
                 e.damage += 5;
+                e.FlashBuff();
             }
         }
     }
+
 }

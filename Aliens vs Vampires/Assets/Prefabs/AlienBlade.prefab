@@ -183,6 +183,7 @@ MonoBehaviour:
   attackCooldown: 1
   damage: 10
   lane: 0
+  swordSound: {fileID: 8300000, guid: 61942f0b5588d48418a503e7f438ccaa, type: 3}
 --- !u!114 &8230337295413778442
 MonoBehaviour:
   m_ObjectHideFlags: 0
